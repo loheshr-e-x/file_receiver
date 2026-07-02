@@ -1,0 +1,25 @@
+# Virtual environments
+venv/
+venvi/
+.env/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local database and uploads
+transactions.db
+print_jobs/
+*.pdf
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor settings
+.vscode/
+.idea/
+
+Campus Print Service - Payment Portal.pdf

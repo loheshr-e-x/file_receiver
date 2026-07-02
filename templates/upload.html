@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Document</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Inter, system-ui, sans-serif;
+            background: #111827;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .card {
+            width: 100%;
+            max-width: 520px;
+            border-radius: 32px;
+            background: #1f2937;
+            box-shadow: 0 40px 120px rgba(0,0,0,0.25);
+            padding: 36px;
+        }
+        .heading {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+        .subtext {
+            color: #9ca3af;
+            margin-bottom: 32px;
+        }
+        label {
+            display: block;
+        }
+        input[type="file"] {
+            width: 100%;
+            color: #9ca3af;
+            background: #111827;
+            border: 1px solid #374151;
+            border-radius: 18px;
+            padding: 18px 16px;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+        input[type="file"]::file-selector-button {
+            margin-right: 16px;
+            padding: 14px 22px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #ff7e1a 0%, #ff5f0c 100%);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        input[type="file"]::file-selector-button:hover {
+            opacity: 0.92;
+        }
+        #file-name-display {
+            margin-top: 12px;
+            color: #fbbf24;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            white-space: break-spaces;
+            word-break: break-word;
+        }
+        button[type="submit"] {
+            width: 100%;
+            margin-top: 28px;
+            padding: 18px;
+            border: none;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #ff7e1a 0%, #ff5f0c 100%);
+            color: white;
+            font-size: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            box-shadow: 0 20px 40px rgba(255,126,26,0.24);
+        }
+        button[type="submit"]:hover {
+            transform: translateY(-1px);
+            opacity: 0.98;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2 class="heading">Authentication Successful!</h2>
+        <p class="subtext">Welcome, {{ user_roll }}. Ready to print.</p>
+
+        <form action="/submit-document" method="POST" enctype="multipart/form-data" class="space-y-6">
+            <input type="hidden" name="validated_utr" value="{{ validated_utr }}">
+            <input type="hidden" name="user_roll" value="{{ user_roll }}">
+
+            <label>
+                <span class="sr-only">Choose PDF Document</span>
+                <input type="file" name="file" accept=".pdf" required onchange="updateFileName(this)">
+            </label>
+
+            <div id="file-name-display" class="hidden"></div>
+
+            <button type="submit">Submit to Printer</button>
+        </form>
+    </div>
+
+    <script>
+        function updateFileName(input) {
+            const display = document.getElementById('file-name-display');
+            if (input.files.length > 0) {
+                display.textContent = 'Selected: ' + input.files[0].name;
+                display.classList.remove('hidden');
+            } else {
+                display.textContent = '';
+                display.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

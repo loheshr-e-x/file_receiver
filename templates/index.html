@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Print Service - Payment Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'f1-dark': '#111111', 
+                        'f1-orange': '#FF8100', 
+                        'f1-orange-gradient-start': '#FFA500', 
+                        'f1-orange-gradient-end': '#FF6F00', 
+                    },
+                    fontFamily: {
+                        sans: ['SF Pro Display', 'Roboto', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #FFA500 0%, #FF6F00 100%);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4 antialiased">
+
+    <div class="fixed inset-0 -z-10 bg-gradient-to-br from-f1-orange-gradient-start to-f1-orange-gradient-end opacity-90">
+        <div class="absolute inset-0 bg-[url('https://example.com/example-doodle-pattern.png')] opacity-10"></div>
+    </div>
+
+    <div class="w-full max-w-md p-8 rounded-3xl bg-f1-dark shadow-2xl text-white transform scale-100 hover:scale-[1.01] transition-transform duration-300">
+        
+        <form action="/verify-utr" method="POST">
+            <div class="mb-10">
+                <h2 class="text-3xl font-bold mb-5 tracking-tight">STEP 1: Enter Details</h2>
+                
+                <label for="roll_number" class="block text-sm font-medium text-gray-300 mb-2">Roll Number</label>
+                <input type="text" id="roll_number" name="roll_number" 
+                       placeholder="e.g., 240701598" 
+                       pattern="240701[0-9]{3}" 
+                       title="Must start with 240701 followed by exactly 3 digits"
+                       required
+                       class="w-full p-4 rounded-xl border border-gray-700 bg-gray-900 text-white placeholder-gray-500 focus:ring-2 focus:ring-f1-orange focus:border-f1-orange transition-colors">
+            </div>
+
+            <div class="mb-10">
+                <h2 class="text-3xl font-bold mb-5 tracking-tight">STEP 2: Payment</h2>
+                
+                <div class="flex items-start gap-6 p-4 rounded-2xl bg-gray-900 border border-gray-700">
+                    <div class="w-28 h-28 rounded-lg border border-f1-orange p-1 flex-shrink-0 bg-white overflow-hidden">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi%3A%2F%2Fpay%3Fpa%3D9940791534%40mbkns%26pn%3DPrintService%26am%3D10.00%26cu%3DINR" 
+                             alt="Payment QR Code" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    
+                    <div class="flex flex-col gap-1 text-sm pt-1">
+                        <p class="font-semibold text-white">Scan QR Code to Pay</p>
+                        <p class="text-lg font-bold text-white">Amount: ₹10/-</p>
+                        <span class="text-f1-orange font-semibold text-xs tracking-wide uppercase">SCAN & PAY</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-10">
+                <h2 class="text-3xl font-bold mb-5 tracking-tight">STEP 3: Transaction Reference</h2>
+                
+                <label for="utr_number" class="block text-sm font-medium text-gray-300 mb-2">UTR Transaction Number</label>
+                <input type="text" id="utr_number" name="utr_number" 
+                       placeholder="e.g., 123456789012" 
+                       pattern="\d{12}" 
+                       minlength="12" 
+                       maxlength="12"
+                       title="Please enter exactly 12 digits"
+                       required
+                       class="w-full p-4 rounded-xl border border-gray-700 bg-gray-900 text-white placeholder-gray-500 focus:ring-2 focus:ring-f1-orange focus:border-f1-orange transition-colors">
+            </div>
+
+            <div class="mt-8">
+                <button type="submit" 
+                        class="w-full py-4 rounded-xl bg-gradient-to-r from-f1-orange-gradient-start to-f1-orange-gradient-end text-white text-lg font-bold uppercase tracking-wide shadow-lg hover:opacity-90 focus:ring-4 focus:ring-orange-300 transition-all">
+                    SUBMIT & VERIFY
+                </button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
