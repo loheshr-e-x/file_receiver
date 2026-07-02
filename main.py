@@ -17,7 +17,7 @@ from googleapiclient.http import MediaFileUpload
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
-DB_FILE = os.path.join(BASE_DIR, "transactions.db")
+DB_FILE = os.environ.get("DB_PATH", os.path.join(BASE_DIR, "transactions.db"))
 PRINT_JOBS_DIR = os.path.join(BASE_DIR, "print_jobs")
 # Path to Google service account credentials JSON. Prefer providing this
 # as an environment variable so secrets are not checked into git.
