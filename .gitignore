@@ -2,6 +2,7 @@
 venv/
 venvi/
 .env/
+/.env
 .venv/
 
 # Python cache
@@ -13,6 +14,7 @@ __pycache__/
 transactions.db
 print_jobs/
 *.pdf
+credentials.json
 
 # System files
 .DS_Store

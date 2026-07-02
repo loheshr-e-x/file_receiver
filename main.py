@@ -2,9 +2,13 @@ import os
 import re
 import shutil
 import sqlite3
+from dotenv import load_dotenv
 from fastapi import FastAPI, Request, Form, UploadFile, File, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+
+# Load environment variables from a local .env file (for development).
+load_dotenv()
 
 # --- Google Drive Imports ---
 from google.oauth2 import service_account
@@ -15,7 +19,9 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
 DB_FILE = os.path.join(BASE_DIR, "transactions.db")
 PRINT_JOBS_DIR = os.path.join(BASE_DIR, "print_jobs")
-CREDENTIALS_FILE = os.path.join(BASE_DIR, "credentials.json")
+# Path to Google service account credentials JSON. Prefer providing this
+# as an environment variable so secrets are not checked into git.
+CREDENTIALS_FILE = os.getenv("GOOGLE_CREDENTIALS_FILE", os.path.join(BASE_DIR, "credentials.json"))
 GOOGLE_DRIVE_FOLDER_ID = "1IXIe_jpM2sLNCwy1cZSpVtsC2q39p1WH"
 
 app = FastAPI()
