@@ -53,10 +53,10 @@
                 <h2 class="text-3xl font-bold mb-5 tracking-tight">STEP 2: Payment</h2>
                 
                 <div class="flex items-start gap-6 p-4 rounded-2xl bg-gray-900 border border-gray-700">
-                    <div class="w-28 h-28 rounded-lg border border-f1-orange p-1 flex-shrink-0 bg-white overflow-hidden">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi%3A%2F%2Fpay%3Fpa%3D9940791534%40mbkns%26pn%3DPrintService%26am%3D10.00%26cu%3DINR" 
-                             alt="Payment QR Code" 
-                             class="w-full h-full object-cover">
+                        <div class="w-28 h-28 rounded-lg border border-f1-orange p-1 flex-shrink-0 bg-white overflow-hidden">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi%3A%2F%2Fpay%3Fpa%3D{{ upi_id }}%26pn%3DPrintService%26am%3D{{ amount }}%26cu%3DINR" 
+                            alt="Payment QR Code" 
+                            class="w-full h-full object-cover">
                     </div>
                     
                     <div class="flex flex-col gap-1 text-sm pt-1">

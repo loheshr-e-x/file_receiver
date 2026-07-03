@@ -24,6 +24,10 @@ PRINT_JOBS_DIR = os.path.join(BASE_DIR, "print_jobs")
 CREDENTIALS_FILE = os.getenv("GOOGLE_CREDENTIALS_FILE", os.path.join(BASE_DIR, "credentials.json"))
 GOOGLE_DRIVE_FOLDER_ID = "1IXIe_jpM2sLNCwy1cZSpVtsC2q39p1WH"
 
+# Payment configuration (can be overridden with environment variables)
+UPI_ID = os.getenv("UPI_ID", "9940791534@mbkns")
+PAY_AMOUNT = os.getenv("PAY_AMOUNT", "10.00")
+
 app = FastAPI()
 templates = Jinja2Templates(directory=TEMPLATES_DIR)
 
@@ -73,7 +77,11 @@ def mark_utr_used(utr: str) -> None:
 
 @app.get("/", response_class=HTMLResponse)
 async def payment_page(request: Request):
-    return templates.TemplateResponse(request, "index.html", {"request": request})
+    return templates.TemplateResponse(request, "index.html", {
+        "request": request,
+        "upi_id": UPI_ID,
+        "amount": PAY_AMOUNT,
+    })
 
 
 @app.post("/verify-utr", response_class=HTMLResponse)
